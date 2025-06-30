@@ -1,17 +1,14 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("appointmentForm");
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    const formData = new FormData(form);
-    const data = new URLSearchParams(formData);
 
-    fetch("https://script.google.com/macros/s/AKfycbxBmvH_1T1nRRvSvXyx30CyLsvKEBpDn5SNa5HpNgCWmB8Nn2JGGoMKqm5RuS2wM7uW/exec", {
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    fetch("https://script.google.com/macros/s/AKfycbzRxeSco9StkiQomTxk_6vsgB0K1Y1fPm6yQyjrpXJc-LIYt0wz0-Y08imkrpCdnW5e/exec", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: data
+      body: new URLSearchParams(data)
     })
       .then(res => res.text())
       .then(response => {

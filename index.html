@@ -2,35 +2,35 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>益福汽車 Volvo 專業維修保養</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>益福汽車 Volvo 專業維修保養</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="background"></div>
-  <div class="content">
-    <h1>益福汽車 Volvo 專業維修保養</h1>
-    <p>歡迎使用線上預約系統，我們提供專業的 Volvo 維修、保養、檢查等服務。</p>
-    <form class="form" id="appointmentForm">
-      <input type="text" placeholder="姓名" name="name" required />
-      <input type="tel" placeholder="電話" name="phone" required />
-      <input type="text" placeholder="車種" name="carModel" required />
-      <input type="text" placeholder="車牌號碼" name="licensePlate" required />
-      <select name="serviceItem" required>
-        <option value="" disabled selected hidden>請選擇服務項目</option>
-        <option value="換機油">換機油</option>
-        <option value="保養">保養</option>
-        <option value="檢查">檢查</option>
-      </select>
-      <input type="date" name="date" required />
-      <input type="time" name="time" required />
-      <button type="submit">送出預約</button>
-    </form>
-    <div class="record">
-      <span>📂 預約紀錄</span>
+    <div class="background"></div>
+    <div class="content">
+        <h1>益福汽車 Volvo 專業維修保養</h1>
+        <p>歡迎使用線上預約系統，我們提供專業的 Volvo 維修、保養、檢查等服務。</p>
+        <form class="form" id="appointmentForm">
+            <input type="text" placeholder="姓名" name="name" required />
+            <input type="tel" placeholder="電話" name="phone" required />
+            <input type="text" placeholder="車種" name="carModel" required />
+            <input type="text" placeholder="車牌號碼" name="licensePlate" required />
+            <select name="serviceItem" required>
+  <option value="" disabled selected hidden>請選擇服務項目</option>
+  <option value="換機油">換機油</option>
+  <option value="保養">保養</option>
+  <option value="維修">維修</option>
+</select>
+            <input type="date" name="date" required />
+            <input type="time" name="time" required />
+            <button type="submit">送出預約</button>
+        </form>
+        <div class="record">
+            <span>📂 預約紀錄</span>
+        </div>
     </div>
-  </div>
   <script src="script.js"></script>
 </body>
 </html>
