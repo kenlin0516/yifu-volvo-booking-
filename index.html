@@ -1,35 +1,107 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>益福汽車 Volvo 專業維修保養</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #eef1f5;
+      padding: 20px;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .description {
+      text-align: center;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    button {
+      background: #2c3e50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1a242f;
+    }
+    .success {
+      color: green;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    .appointments {
+      background: #fff;
+      padding: 15px;
+      max-width: 700px;
+      margin: 30px auto;
+      border-radius: 8px;
+    }
+    @media screen and (max-width: 480px) {
+      h1 {
+        font-size: 20px;
+      }
+      input, select, button {
+        font-size: 16px;
+      }
+      form {
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>益福汽車 Volvo 專業維修保養</h1>
-  <p class="description">歡迎使用線上預約系統，我們提供專業的 Volvo 維修、保養、檢查等服務。</p>
-  <form id="bookingForm">
-    <input type="text" id="name" placeholder="姓名" required>
-    <input type="tel" id="phone" placeholder="電話" required>
-    <input type="text" id="carModel" placeholder="車種" required>
-    <input type="text" id="license" placeholder="車牌號碼" required>
-    <select id="service">
-      <option value="換機油">換機油</option>
-      <option value="煞車異音檢查">煞車異音檢查</option>
-      <option value="定期保養">定期保養</option>
-      <option value="輪胎更換">輪胎更換</option>
-      <option value="引擎檢查">引擎檢查</option>
-      <option value="其他">其他</option>
-    </select>
-    <input type="date" id="date" required>
-    <input type="time" id="time" required>
-    <button type="submit">送出預約</button>
-  </form>
-  <p class="success" id="successMessage" style="display:none;">✅ 預約成功！我們將盡快與您聯繫確認。</p>
-  <div class="appointments" id="appointmentList">
-    <h2>📋 預約紀錄</h2>
-    <ul id="list"></ul>
-  </div>
-  <script src="script.js"></script>
+
+<h1>益福汽車 Volvo 專業維修保養</h1>
+<p class="description">歡迎使用線上預約系統，我們提供專業的 Volvo 維修、保養、檢查等服務。</p>
+
+<form id="bookingForm">
+  <input type="text" id="name" placeholder="姓名" required>
+  <input type="tel" id="phone" placeholder="電話" required>
+  <input type="text" id="carModel" placeholder="車種" required>
+  <input type="text" id="license" placeholder="車牌號碼" required>
+  <select id="service">
+    <option value="換機油">換機油</option>
+    <option value="煞車異音檢查">煞車異音檢查</option>
+    <option value="定期保養">定期保養</option>
+    <option value="輪胎更換">輪胎更換</option>
+    <option value="引擎檢查">引擎檢查</option>
+    <option value="其他">其他</option>
+  </select>
+  <input type="date" id="date" required>
+  <input type="time" id="time" required>
+  <button type="submit">送出預約</button>
+</form>
+
+<p class="success" id="successMessage" style="display:none;">✅ 預約成功！我們將盡快與您聯繫確認。</p>
+
+<div class="appointments" id="appointmentList">
+  <h2>📋 預約紀錄</h2>
+  <ul id="list"></ul>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
