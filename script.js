@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formData = new FormData(form);
     const data = new URLSearchParams(formData);
 
-    fetch("https://script.google.com/macros/s/AKfycbzRxeSco9StkiQomTxk_6vsgB0K1Y1fPm6yQyjrpXJc-LIYt0wz0-Y08imkrpCdnW5e/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxBmvH_1T1nRRvSvXyx30CyLsvKEBpDn5SNa5HpNgCWmB8Nn2JGGoMKqm5RuS2wM7uW/exec", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
