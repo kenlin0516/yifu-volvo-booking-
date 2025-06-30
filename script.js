@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("appointmentForm");
   form.addEventListener("submit", function (e) {
