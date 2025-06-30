@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fetch("https://script.google.com/macros/s/AKfycbzRxeSco9StkiQomTxk_6vsgB0K1Y1fPm6yQyjrpXJc-LIYt0wz0-Y08imkrpCdnW5e/exec", {
       method: "POST",
-      body: new URLSearchParams(data)
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&')
     })
       .then(res => res.text())
       .then(response => {
