@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>益福汽車 Volvo 專業維修保養</title>
   <style>
     body {
@@ -16,24 +16,18 @@
       padding: 20px;
       margin: 0;
     }
-    h1 {
+    h1, .description {
       text-align: center;
-      color: #fff;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    }
-    .description {
-      text-align: center;
-      color: #eee;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      color: white;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
     }
     form {
-      background: rgba(255,255,255,0.95);
+      background: rgba(255, 255, 255, 0.95);
       padding: 20px;
-      border-radius: 10px;
+      border-radius: 12px;
       max-width: 600px;
       margin: auto;
-      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
     }
     input, select, button {
       width: 100%;
@@ -41,12 +35,18 @@
       margin-top: 10px;
       box-sizing: border-box;
       font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    input[type="date"],
+    input[type="time"] {
+      appearance: auto;
     }
     button {
       background: #2c3e50;
-      color: #fff;
+      color: white;
       border: none;
-      cursor: pointer;
+      font-weight: bold;
     }
     button:hover {
       background: #1a242f;
@@ -69,7 +69,7 @@
 </head>
 <body>
 
-<h1>益福汽車 Volvo 專業維修保養</h1>
+<h1>修保養</h1>
 <p class="description">歡迎使用線上預約系統，我們提供專業的 Volvo 維修、保養、檢查等服務。</p>
 
 <form id="bookingForm">
@@ -92,7 +92,7 @@
 
 <p class="success" id="successMessage" style="display:none;">✅ 預約成功！我們將盡快與您聯繫確認。</p>
 
-<div class="appointments" id="appointmentList">
+<div class="appointments">
   <h2>📋 預約紀錄</h2>
   <ul id="list"></ul>
 </div>
