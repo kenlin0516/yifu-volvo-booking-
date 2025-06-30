@@ -1,31 +1,27 @@
-
-const scriptURL = "https://script.google.com/macros/s/AKfycby8zTiH1b-VrxaabEvXDmsfJ3uy0lepdW3yVGyVk5nRiG1KXIkwhJh4HMLVIqiP2Jeurg/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbzRxeSco9StkiQomTxk_6vsgB0K1Y1fPm6yQyjrpXJc-LIYt0wz0-Y08imkrpCdnW5e/exec";
 
 document.getElementById("bookingForm").addEventListener("submit", function(e) {
   e.preventDefault();
   const data = {
-    name: document.getElementById("name").value,
-    phone: document.getElementById("phone").value,
-    carModel: document.getElementById("carModel").value,
-    license: document.getElementById("license").value,
-    service: document.getElementById("service").value,
-    date: document.getElementById("date").value,
-    time: document.getElementById("time").value
+    "姓名": document.getElementById("姓名").value,
+    "電話": document.getElementById("電話").value,
+    "車種": document.getElementById("車種").value,
+    "車牌": document.getElementById("車牌").value,
+    "項目": document.getElementById("項目").value,
+    "日期": document.getElementById("日期").value,
+    "時間": document.getElementById("時間").value
   };
-
   fetch(scriptURL, {
     method: 'POST',
     body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
+    headers: { 'Content-Type': 'application/json' }
   })
-  .then(response => {
-    document.getElementById("successMessage").style.display = "block";
-    loadAppointments();
+  .then(() => {
+    document.getElementById('successMsg').style.display = 'block';
     document.getElementById("bookingForm").reset();
+    loadAppointments();
   })
-  .catch(error => alert("送出失敗！請稍後再試。"));
+  .catch(() => alert('送出失敗，請稍後再試！'));
 });
 
 function loadAppointments() {
@@ -36,14 +32,10 @@ function loadAppointments() {
       list.innerHTML = "";
       data.reverse().forEach(row => {
         const li = document.createElement("li");
-        li.textContent = `🧑‍🔧 ${row.name}／📞 ${row.phone}／🚗 ${row.carModel}（${row.license}） - ${row.service}（${row.date} ${row.time}）`;
+        li.textContent = `🧑‍🔧${row.姓名}／📞${row.電話}／🚗${row.車種}（${row.車牌}） - ${row.項目}（${row.日期} ${row.時間}）`;
         list.appendChild(li);
       });
     })
-    .catch(err => {
-      console.error("無法載入預約資料", err);
-    });
+    .catch(err => console.error("無法載入預約資料", err));
 }
-
-// 自動載入一次
 loadAppointments();
