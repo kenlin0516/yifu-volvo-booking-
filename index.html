@@ -1,153 +1,32 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>益福汽車線上預約</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background-image: url('background.jpg');
-      background-size: cover;
-      background-attachment: fixed;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    .container {
-      max-width: 500px;
-      margin: 50px auto;
-      background: rgba(255,255,255,0.9);
-      padding: 20px;
-      border-radius: 15px;
-    }
-    h2 {
-      text-align: center;
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 15px;
-    }
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-top: 5px;
-    }
-    button {
-      width: 100%;
-      background-color: #192857;
-      color: white;
-      padding: 12px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      margin-top: 20px;
-      cursor: pointer;
-    }
-    .success-message {
-      color: green;
-      margin-top: 20px;
-      font-weight: bold;
-      text-align: center;
-    }
-    .records {
-      background: #fff;
-      border-radius: 10px;
-      margin-top: 30px;
-      padding: 10px;
-    }
-    .records h3 {
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-    }
-    .records h3::before {
-      content: "📋";
-      margin-right: 8px;
-    }
-    .record-list {
-      font-size: 14px;
-      line-height: 1.6;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>益福汽車 Volvo 專業維修保養</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h2>益福汽車線上預約</h2>
-    <form id="bookingForm">
-      <label for="name">姓名</label>
-      <input type="text" id="name" name="name" required />
-
-      <label for="phone">電話</label>
-      <input type="text" id="phone" name="phone" required />
-
-      <label for="model">車種</label>
-      <input type="text" id="model" name="model" required />
-
-      <label for="plate">車牌</label>
-      <input type="text" id="plate" name="plate" required />
-
-      <label for="service">服務項目</label>
-      <select id="service" name="service">
-        <option>換機油</option>
-        <option>定期保養</option>
-        <option>輪胎更換</option>
-      </select>
-
-      <label for="date">日期</label>
-      <input type="date" id="date" name="date" required />
-
-      <label for="time">時間</label>
-      <input type="time" id="time" name="time" required />
-
-      <button type="submit">送出預約</button>
-    </form>
-    <div id="successMsg" class="success-message" style="display:none;">
-      ✅ 預約成功！我們將盡快與您聯繫確認。
+    <div class="background"></div>
+    <div class="container">
+        <h1>益福汽車 Volvo 專業維修保養</h1>
+        <p class="subtitle">歡迎使用線上預約系統，我們提供專業的 Volvo 維修、保養、檢查等服務。</p>
+        <form>
+            <input type="text" placeholder="姓名" required>
+            <input type="tel" placeholder="電話" required>
+            <input type="text" placeholder="車種" required>
+            <input type="text" placeholder="車牌號碼" required>
+            <select required>
+                <option>換機油</option>
+            </select>
+            <input type="date" required>
+            <input type="time" required>
+            <button type="submit">送出預約</button>
+        </form>
+        <div class="record">
+            <img src="https://img.icons8.com/ios-filled/50/000000/task.png" alt="icon">
+            <span>預約紀錄</span>
+        </div>
     </div>
-    <div class="records">
-      <h3>預約紀錄</h3>
-      <div id="recordList" class="record-list">載入中...</div>
-    </div>
-  </div>
-  <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzRxeSco9StkiQomTxk_6vsgB0K1Y1fPm6yQyjrpXJc-LIYt0wz0-Y08imkrpCdnW5e/exec";
-    const form = document.getElementById("bookingForm");
-    const successMsg = document.getElementById("successMsg");
-    const recordList = document.getElementById("recordList");
-
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      const data = new FormData(form);
-      fetch(scriptURL, { method: "POST", body: data })
-        .then(response => {
-          successMsg.style.display = "block";
-          form.reset();
-          loadRecords();
-        })
-        .catch(error => alert("送出失敗，請稍後再試！"));
-    });
-
-    function loadRecords() {
-      fetch(scriptURL)
-        .then(res => res.json())
-        .then(data => {
-          recordList.innerHTML = data.map(r => 
-            `<div>🧾 ${r.姓名} / ${r.電話} / ${r.車種} / ${r.車牌} / ${r.服務項目} / ${r.日期} ${r.時間}</div>`
-          ).join("");
-        })
-        .catch(err => {
-          recordList.innerHTML = "無法載入資料。";
-        });
-    }
-
-    loadRecords();
-  </script>
 </body>
 </html>
