@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <title>益福汽車線上預約</title>
@@ -18,19 +19,26 @@
 <body>
   <h2 style="text-align:center;">益福汽車線上預約</h2>
   <form id="bookingForm">
-    <label for="姓名">姓名</label><input type="text" id="姓名" required>
-    <label for="電話">電話</label><input type="tel" id="電話" required>
-    <label for="車種">車種</label><input type="text" id="車種" required>
-    <label for="車牌">車牌</label><input type="text" id="車牌" required>
-    <label for="項目">服務項目</label><select id="項目">
+    <label for="姓名">姓名</label>
+    <input type="text" id="姓名" required>
+    <label for="電話">電話</label>
+    <input type="tel" id="電話" required>
+    <label for="車種">車種</label>
+    <input type="text" id="車種" required>
+    <label for="車牌">車牌</label>
+    <input type="text" id="車牌" required>
+    <label for="項目">服務項目</label>
+    <select id="項目">
       <option value="換機油">換機油</option>
       <option value="定期保養">定期保養</option>
       <option value="輪胎更換">輪胎更換</option>
       <option value="引擎檢查">引擎檢查</option>
       <option value="其他">其他</option>
     </select>
-    <label for="日期">日期</label><input type="date" id="日期" required>
-    <label for="時間">時間</label><input type="time" id="時間" required>
+    <label for="日期">日期</label>
+    <input type="date" id="日期" required>
+    <label for="時間">時間</label>
+    <input type="time" id="時間" required>
     <button type="submit">送出預約</button>
     <div class="success" id="successMsg" style="display:none;">✅ 預約已送出！</div>
   </form>

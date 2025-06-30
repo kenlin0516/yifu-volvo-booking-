@@ -1,3 +1,4 @@
+
 const scriptURL = "https://script.google.com/macros/s/AKfycbzRxeSco9StkiQomTxk_6vsgB0K1Y1fPm6yQyjrpXJc-LIYt0wz0-Y08imkrpCdnW5e/exec";
 
 document.getElementById("bookingForm").addEventListener("submit", function(e) {
@@ -11,6 +12,7 @@ document.getElementById("bookingForm").addEventListener("submit", function(e) {
     "日期": document.getElementById("日期").value,
     "時間": document.getElementById("時間").value
   };
+
   fetch(scriptURL, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -36,6 +38,9 @@ function loadAppointments() {
         list.appendChild(li);
       });
     })
-    .catch(err => console.error("無法載入預約資料", err));
+    .catch(err => {
+      console.error("無法載入預約資料", err);
+    });
 }
+
 loadAppointments();
