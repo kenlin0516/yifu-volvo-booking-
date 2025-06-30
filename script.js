@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fetch("https://script.google.com/macros/s/AKfycbxkZiQ72rHKzcsxM-MkJulHmHMAmrwecFYISwi9FS5_tbo4_6gVgKHfHTu5OyuH7S46/exec", {
       method: "POST",
-      body: new URLSearchParams(data)
+      body: new URLSearchParams(data),
     })
       .then(res => res.text())
       .then(response => {
