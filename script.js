@@ -1,7 +1,5 @@
-
-const scriptURL = "https://script.google.com/macros/s/AKfycbzRxeSco9StkiQomTxk_6vsgB0K1Y1fPm6yQyjrpXJc-LIYt0wz0-Y08imkrpCdnW5e/exec";
-
-document.getElementById("bookingForm").addEventListener("submit", function(e) {
+const API = "https://script.google.com/macros/s/AKfycbzRxeSco9StkiQomTxk_6vsgB0K1Y1fPm6yQyjrpXJc-LIYt0wz0-Y08imkrpCdnW5e/exec";
+document.getElementById("bookingForm").addEventListener("submit", e => {
   e.preventDefault();
   const data = {
     "姓名": document.getElementById("姓名").value,
@@ -12,35 +10,14 @@ document.getElementById("bookingForm").addEventListener("submit", function(e) {
     "日期": document.getElementById("日期").value,
     "時間": document.getElementById("時間").value
   };
-
-  fetch(scriptURL, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: { 'Content-Type': 'application/json' }
-  })
-  .then(() => {
-    document.getElementById('successMsg').style.display = 'block';
-    document.getElementById("bookingForm").reset();
-    loadAppointments();
-  })
-  .catch(() => alert('送出失敗，請稍後再試！'));
+  fetch(API, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+  .then(() => {document.getElementById("successMsg").style.display="block";document.getElementById("bookingForm").reset();load();})
+  .catch(() => alert("送出失敗，請稍後再試！"));
 });
-
-function loadAppointments() {
-  fetch(scriptURL)
-    .then(res => res.json())
-    .then(data => {
-      const list = document.getElementById("list");
-      list.innerHTML = "";
-      data.reverse().forEach(row => {
-        const li = document.createElement("li");
-        li.textContent = `🧑‍🔧${row.姓名}／📞${row.電話}／🚗${row.車種}（${row.車牌}） - ${row.項目}（${row.日期} ${row.時間}）`;
-        list.appendChild(li);
-      });
-    })
-    .catch(err => {
-      console.error("無法載入預約資料", err);
-    });
+function load(){
+  fetch(API).then(r=>r.json()).then(data=>{
+    const ul = document.getElementById("list"); ul.innerHTML="";
+    data.reverse().forEach(r=>{const li=document.createElement("li");li.textContent=`🧑‍🔧${r.姓名}／📞${r.電話}／🚗${r.車種}（${r.車牌}） ${r.項目} ${r.日期} ${r.時間}`;ul.appendChild(li);});
+  }).catch(console.error);
 }
-
-loadAppointments();
+load();
