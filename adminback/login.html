@@ -2,29 +2,25 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>益福汽車 – 後台登入</title>
+  <base target="_top">
+  <title>後台登入</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
 <body>
   <div class="container" style="max-width:360px; margin-top:100px;">
-    <h3 class="text-center mb-4">益福汽車 – 後台登入</h3>
+    <h3 class="text-center mb-4">益福汽車 - 後台登入</h3>
     <input type="password" id="pwd" class="form-control mb-3" placeholder="輸入管理密碼" autofocus>
     <button id="btn" class="btn btn-primary w-100">登入</button>
   </div>
   <script>
-    const PASS = 'admin';  // 👉 這裡放你的密碼
+    const PASS = 'admin';
     document.getElementById('btn').onclick = () => {
       if (document.getElementById('pwd').value === PASS) {
         sessionStorage.setItem('logged','true');
-        // 直接跳到 admin.html
-        window.location.href = 'admin.html';
-      } else {
-        alert('密碼錯誤');
-      }
+        location.search = '?page=admin';
+      } else alert('密碼錯誤');
     };
-    document.getElementById('pwd').addEventListener('keyup', e => {
-      if (e.key === 'Enter') document.getElementById('btn').click();
-    });
+    document.getElementById('pwd').addEventListener('keyup', e => { if (e.key==='Enter') document.getElementById('btn').click(); });
   </script>
 </body>
 </html>
