@@ -114,3 +114,45 @@ body {
   margin-top: 0 !important;    /* 描述緊貼標題下方 */
   margin-bottom: 1rem !important; /* 描述下方留點空間 */
 }
+
+
+
+@media screen and (max-width: 768px) {
+  body {
+    background-size: cover;
+    background-position: center;
+    padding: 10px;
+  }
+
+  .container {
+    width: 100%;
+    padding: 20px 15px;
+    box-sizing: border-box;
+  }
+
+  .form-container {
+    width: 100%;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+
+  .form-container input,
+  .form-container select,
+  .form-container button {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .form-container button {
+    padding: 12px 0;
+  }
+
+  .record-button {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 0;
+    margin-top: 15px;
+  }
+}
