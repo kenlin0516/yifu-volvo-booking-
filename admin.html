@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -21,41 +20,35 @@
         <th>姓名</th><th>電話</th><th>車種</th><th>車牌</th><th>項目</th><th>日期</th><th>時間</th>
       </tr>
     </thead>
-    <tbody id="table-body">
-      <tr><td colspan="7">讀取中...</td></tr>
-    </tbody>
+    <tbody id="table-body"></tbody>
   </table>
   <script>
     if (sessionStorage.getItem('login') !== 'true') {
       window.location.href = 'login.html';
     }
-
     function logout() {
       sessionStorage.removeItem('login');
       window.location.href = 'login.html';
     }
 
-    fetch("https://docs.google.com/spreadsheets/d/1Rbp4sdGnvLKzKVRCgb_tJAuw9KyZUeOplGWmmCi1OG8/gviz/tq?tqx=out:json")
-      .then(res => res.text())
-      .then(text => {
-        const json = JSON.parse(text.substr(47).slice(0, -2));
-        const rows = json.table.rows;
-        const tbody = document.getElementById("table-body");
-        tbody.innerHTML = "";
-        rows.forEach((row, index) => {
-          if (index === 0) return; // Skip title row
-          const tr = document.createElement("tr");
-          row.c.forEach(cell => {
-            const td = document.createElement("td");
-            td.textContent = cell ? cell.v : "";
-            tr.appendChild(td);
-          });
+    fetch("https://script.google.com/macros/s/AKfycbwhXAjx2AReraUx8ztJbik4018zdwXURd8TsxOowZmtzd2LtsEcJhxhV8utLjFwoBnl6g/exec")
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById('table-body');
+        tbody.innerHTML = '';
+        data.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${row['姓名'] || ''}</td>
+            <td>${row['電話'] || ''}</td>
+            <td>${row['車種'] || ''}</td>
+            <td>${row['車牌'] || ''}</td>
+            <td>${row['項目'] || ''}</td>
+            <td>${row['日期'] || ''}</td>
+            <td>${row['時間'] || ''}</td>
+          `;
           tbody.appendChild(tr);
         });
-      })
-      .catch(err => {
-        const tbody = document.getElementById("table-body");
-        tbody.innerHTML = "<tr><td colspan='7'>讀取失敗</td></tr>";
       });
   </script>
 </body>
