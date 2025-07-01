@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
         time: document.getElementsByName('time')[0].value,
       };
 
-      fetch('https://script.google.com/macros/s/AKfycbw5Su_3xvgWLTq9BQrGp1IB5JbjWpiFywvtY19rAk2v-R1D0OBmCvo8SRxJ-C3Gq/exec', {
+      fetch('https://script.google.com/macros/s/AKfycbw5Su_3xvgWLTq9BQrGp1IBSJbjNYipiFywutYi9fXa2v-R1DOoOBmCv0sSRxJ-c3Gq/exec', {
         method: 'POST',
-        body: JSON.stringify({ contents: JSON.stringify(data) }),
+        body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json'
         }
