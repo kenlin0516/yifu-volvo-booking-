@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>後台登入</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-container {
+      background: white;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    input {
+      display: block;
+      width: 100%;
+      margin-bottom: 1em;
+      padding: 0.5em;
+    }
+    button {
+      width: 100%;
+      padding: 0.5em;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>後台登入</h2>
+    <input type="password" id="password" placeholder="輸入密碼" />
+    <button onclick="login()">登入</button>
+  </div>
+  <script>
+    function login() {
+      const pwd = document.getElementById('password').value;
+      if (pwd === 'yifu888') {
+        localStorage.setItem('adminAuth', 'true');
+        window.location.href = 'admin.html';
+      } else {
+        alert('密碼錯誤');
+      }
+    }
+  </script>
+</body>
+</html>
