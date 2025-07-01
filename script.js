@@ -1,8 +1,10 @@
-document.addEventListener('DOMContentLoaded', function() {
+
+document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('bookingForm');
   if (form) {
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
+
       const data = {
         name: document.getElementById('name').value,
         phone: document.getElementById('phone').value,
@@ -12,24 +14,30 @@ document.addEventListener('DOMContentLoaded', function() {
         date: document.getElementById('date').value,
         time: document.getElementById('time').value
       };
-      fetch("https://script.google.com/macros/s/AKfycbw5Su_3xvgWLTq9BQrGp1IBSJbjNYipiFywutYi9fXa2v-R1DOoOBmCv0sSRxJ-c3Gq/exec", {
-        method: "POST",
+
+      fetch('https://script.google.com/macros/s/AKfycbw5Su_3xvgWLTq9BQrGp1IBSJbjNYipiFywutYi9fXa2v-R1DOoOBmCv0sSRxJ-c3Gq/exec', {
+        method: 'POST',
         body: JSON.stringify(data),
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         }
       })
       .then(res => res.text())
       .then(res => {
-        if(res === "Success") {
+        if (res === 'Success') {
           document.getElementById('successMessage').style.display = 'block';
           form.reset();
         } else {
-          alert('發生錯誤，請稍後再試');
+          alert('發生錯誤，請稍後再試。');
         }
-      }).catch(() => {
-        alert('發生錯誤，請稍後再試');
       });
     });
+  }
+
+  // 清除網址參數
+  if (window.location.search) {
+    const url = new URL(window.location);
+    url.search = '';
+    window.history.replaceState({}, document.title, url.toString());
   }
 });
