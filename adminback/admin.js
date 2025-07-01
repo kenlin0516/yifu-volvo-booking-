@@ -1,24 +1,17 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzsQcgLp6fcWM4Z2btrCaepz8JaUOVjCZxpsZuGdn4tFm2L2fDs-vcvD8DGsxeuzurhEg/exec';
+const base = location.href.split('?')[0];
 let currentSort = 'asc';
 
-// 取得並更新紀錄
+// 取得並顯示紀錄
 async function fetchRecords() {
-  const searchTerm = document.getElementById('searchInput').value.trim();
-  const params = new URLSearchParams();
-  if (searchTerm) params.append('searchTerm', searchTerm);
-  if (currentSort) params.append('sortOrder', currentSort);
-  const url = scriptURL + (params.toString() ? '?' + params.toString() : '');
-
-  try {
-    const res = await fetch(url);
-    const json = await res.json();
-    displayRecords(json.records);
-  } catch (err) {
-    console.error('讀取失敗', err);
-  }
+  const term = document.getElementById('searchInput').value.trim();
+  const params = new URLSearchParams({ json: 'true', sortOrder: currentSort });
+  if (term) params.append('searchTerm', term);
+  const res = await fetch(base + '?' + params);
+  const { records } = await res.json();
+  displayRecords(records);
 }
 
-// 顯示資料表
+// 渲染表格
 function displayRecords(data) {
   const tbody = document.getElementById('recordTableBody');
   tbody.innerHTML = '';
@@ -41,22 +34,14 @@ function displayRecords(data) {
 // 刪除功能
 async function deleteRecord(rowNumber) {
   if (!confirm('確定要刪除這筆紀錄嗎？')) return;
-  try {
-    const res = await fetch(scriptURL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'delete', rowNumber })
-    });
-    const result = await res.json();
-    if (result.status === 'success') {
-      alert('刪除成功');
-      fetchRecords();
-    } else {
-      alert('刪除失敗：' + result.message);
-    }
-  } catch (err) {
-    alert('刪除失敗：' + err.message);
-  }
+  const res = await fetch(base, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'delete', rowNumber })
+  });
+  const r = await res.json();
+  alert(r.message);
+  fetchRecords();
 }
 
 // 排序切換
@@ -66,9 +51,14 @@ function toggleSort() {
   fetchRecords();
 }
 
-// 綁定事件
-document.getElementById('searchInput').addEventListener('input', fetchRecords);
-document.getElementById('sortButton').addEventListener('click', toggleSort);
+// 登出
+document.getElementById('logoutBtn')?.addEventListener('click', () => {
+  window.location.href = '?';
+});
 
-// 初始載入
-window.onload = fetchRecords;
+// 綁定事件 & 初始載入
+window.onload = () => {
+  document.getElementById('searchInput').addEventListener('input', fetchRecords);
+  document.getElementById('sortButton').addEventListener('click', toggleSort);
+  fetchRecords();
+};
