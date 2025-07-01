@@ -2,54 +2,65 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>益福汽車後台管理</title>
+  <title>益福汽車 - 後台預約紀錄</title>
   <style>
-    body { font-family: Arial; background: #f0f0f0; padding: 20px; }
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f2f2f2; }
     h1 { text-align: center; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
-    th, td { padding: 12px; border: 1px solid #ccc; text-align: left; }
-    .logout { float: right; background: #c00; color: white; padding: 5px 10px; text-decoration: none; }
+    table { width: 100%; border-collapse: collapse; background-color: #fff; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    th { background-color: #444; color: #fff; }
+    .logout { float: right; margin-bottom: 10px; background: #d00; color: white; padding: 6px 12px; text-decoration: none; }
   </style>
 </head>
 <body>
-  <a href="#" class="logout" onclick="logout()">登出</a>
-  <h1>益福汽車 - 預約管理後台</h1>
-  <table id="data-table">
+  <a class="logout" href="#" onclick="logout()">登出</a>
+  <h1>益福汽車 - 後台預約紀錄</h1>
+  <table>
     <thead>
       <tr>
-        <th>姓名</th><th>電話</th><th>車種</th><th>車牌</th><th>項目</th><th>日期</th><th>時間</th>
+        <th>姓名</th>
+        <th>電話</th>
+        <th>車種</th>
+        <th>車牌</th>
+        <th>項目</th>
+        <th>日期</th>
+        <th>時間</th>
       </tr>
     </thead>
-    <tbody id="table-body"></tbody>
+    <tbody id="records"></tbody>
   </table>
+
   <script>
-    if (sessionStorage.getItem('login') !== 'true') {
-      window.location.href = 'login.html';
-    }
-    function logout() {
+    if (sessionStorage.getItem('login') !== 'true') {{
+      location.href = 'login.html';
+    }}
+
+    function logout() {{
       sessionStorage.removeItem('login');
-      window.location.href = 'login.html';
-    }
+      location.href = 'login.html';
+    }}
 
     fetch("https://script.google.com/macros/s/AKfycbwhXAjx2AReraUx8ztJbik4018zdwXURd8TsxOowZmtzd2LtsEcJhxhV8utLjFwoBnl6g/exec")
-      .then(res => res.json())
-      .then(data => {
-        const tbody = document.getElementById('table-body');
-        tbody.innerHTML = '';
-        data.forEach(row => {
+      .then(response => response.json())
+      .then(data => {{
+        const tbody = document.getElementById('records');
+        data.forEach(row => {{
           const tr = document.createElement('tr');
           tr.innerHTML = `
-            <td>${row['姓名'] || ''}</td>
-            <td>${row['電話'] || ''}</td>
-            <td>${row['車種'] || ''}</td>
-            <td>${row['車牌'] || ''}</td>
-            <td>${row['項目'] || ''}</td>
-            <td>${row['日期'] || ''}</td>
-            <td>${row['時間'] || ''}</td>
+            <td>${{row['姓名'] || ''}}</td>
+            <td>${{row['電話'] || ''}}</td>
+            <td>${{row['車種'] || ''}}</td>
+            <td>${{row['車牌'] || ''}}</td>
+            <td>${{row['項目'] || ''}}</td>
+            <td>${{row['日期'] || ''}}</td>
+            <td>${{row['時間'] || ''}}</td>
           `;
           tbody.appendChild(tr);
-        });
-      });
+        }});
+      }})
+      .catch(error => {{
+        alert("讀取預約資料失敗！");
+      }});
   </script>
 </body>
 </html>
