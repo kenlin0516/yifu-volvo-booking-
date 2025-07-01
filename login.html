@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>後台登入</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>後台登入 - 益福汽車</title>
+  <style>
+    body { font-family: Arial; background: #f0f0f0; padding: 50px; text-align: center; }
+    .box { background: #fff; padding: 30px; border-radius: 10px; max-width: 400px; margin: auto; }
+    input, button { width: 100%; padding: 12px; margin: 10px 0; }
+  </style>
 </head>
 <body>
-  <div class="form-container">
+  <div class="box">
     <h2>後台登入</h2>
-    <form onsubmit="return login(event)">
-      <input type="text" id="username" placeholder="帳號" required />
-      <input type="password" id="password" placeholder="密碼" required />
-      <button type="submit">登入</button>
-    </form>
-    <p id="error" style="color:red;"></p>
+    <input id="username" placeholder="帳號">
+    <input id="password" type="password" placeholder="密碼">
+    <button onclick="login()">登入</button>
+    <p id="msg" style="color:red;"></p>
   </div>
-  <script src="admin.js"></script>
+  <script>
+    function login() {
+      const u = document.getElementById('username').value;
+      const p = document.getElementById('password').value;
+      if (u === 'admin' && p === 'yifu2025') {
+        sessionStorage.setItem('login', 'true');
+        location.href = 'admin.html';
+      } else {
+        document.getElementById('msg').innerText = '帳號或密碼錯誤';
+      }
+    }
+  </script>
 </body>
 </html>
