@@ -144,3 +144,38 @@ body {
     margin-right: auto;
   }
 }
+
+
+
+@media screen and (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    form {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    input, select, button, .form-group {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    .record-button {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
