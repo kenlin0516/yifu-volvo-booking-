@@ -170,16 +170,22 @@ body {
 }
 
 
-/* 手機版優化 */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   body {
+    align-items: center;
+    padding: 1rem;
     overflow-x: hidden;
   }
 
   .container {
-    max-width: 90vw;
-    margin: 0 auto;
-    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .reservation-form-wrapper {
+    width: 100%;
+    padding: 1rem;
     box-sizing: border-box;
   }
 
@@ -188,13 +194,7 @@ body {
   }
 
   input, select, button {
-    width: 100% !important;
-    box-sizing: border-box;
-  }
-
-  #record-button {
-    display: block;
     width: 100%;
-    margin: 20px auto 0 auto;
+    font-size: 1rem;
   }
 }
