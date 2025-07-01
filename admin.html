@@ -1,47 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>預約後台</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 1em;
-      background: #f9f9f9;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1em;
-    }
-    th, td {
-      padding: 0.5em;
-      border: 1px solid #ccc;
-      text-align: left;
-    }
-    h2 {
-      text-align: center;
-    }
-  </style>
+  <title>後台管理</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>預約紀錄</h2>
-  <table id="records-table">
-    <thead>
-      <tr>
-        <th>姓名</th>
-        <th>電話</th>
-        <th>車種</th>
-        <th>車牌號碼</th>
-        <th>服務項目</th>
-        <th>預約日期</th>
-        <th>預約時間</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-  <script src="admin.js"></script>
+  <div class="form-container">
+    <h2>預約紀錄</h2>
+    <table border="1" width="100%">
+      <thead>
+        <tr><th>姓名</th><th>電話</th><th>車種</th><th>車牌</th><th>項目</th><th>日期</th><th>時間</th></tr>
+      </thead>
+      <tbody id="record-table">
+        <tr><td>測試</td><td>0912345678</td><td>Volvo</td><td>ABC-1234</td><td>換機油</td><td>2025-07-02</td><td>10:00</td></tr>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
