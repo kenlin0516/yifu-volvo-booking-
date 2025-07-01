@@ -117,42 +117,30 @@ body {
 
 
 
-@media screen and (max-width: 768px) {
-  body {
-    background-size: cover;
-    background-position: center;
-    padding: 10px;
-  }
-
-  .container {
-    width: 100%;
-    padding: 20px 15px;
-    box-sizing: border-box;
-  }
-
+/* 手機版樣式優化 */
+@media (max-width: 768px) {
   .form-container {
-    width: 100%;
-    padding: 20px 10px;
-    box-sizing: border-box;
-    margin: 0 auto;
+    width: 90% !important;
+    margin: 40px auto !important;
+    padding: 20px !important;
   }
 
-  .form-container input,
-  .form-container select,
-  .form-container button {
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 16px;
+  form input,
+  form select,
+  form button {
+    font-size: 16px !important;
   }
 
-  .form-container button {
-    padding: 12px 0;
+  .form-container h2,
+  .form-container p {
+    text-align: center !important;
+    font-size: 18px !important;
   }
 
-  .record-button {
-    width: 100%;
-    font-size: 16px;
-    padding: 10px 0;
-    margin-top: 15px;
+  #recordsBtn {
+    margin-top: 10px !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
