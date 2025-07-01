@@ -1,60 +1,69 @@
+
 const scriptURL = 'https://script.google.com/macros/s/AKfycbzsQcgLp6fcWM4Z2btrCaepz8JaUOVjCZxpsZuGdn4tFm2L2fDs-vcvD8DGsxeuzurhEg/exec';
 
-let records = [];
-const tableBody = document.querySelector('#recordsTable tbody');
-const searchInput = document.getElementById('searchInput');
-
-function fetchRecords() {
-  fetch(scriptURL)
-    .then(res => res.json())
-    .then(data => {
-      records = data.records;
-      renderTable(records);
-    });
+async function fetchRecords() {
+  const res = await fetch(scriptURL);
+  const data = await res.json();
+  window.originalData = data;
+  displayRecords(data);
 }
 
-function renderTable(data) {
-  tableBody.innerHTML = '';
-  data.forEach(record => {
+function displayRecords(data) {
+  const tbody = document.getElementById('recordTableBody');
+  tbody.innerHTML = '';
+  data.forEach((row, index) => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>${record.name}</td>
-      <td>${record.phone}</td>
-      <td>${record.carModel}</td>
-      <td>${record.plate}</td>
-      <td>${record.service}</td>
-      <td>${record.date}</td>
-      <td>${record.time}</td>
-      <td><button onclick="deleteRecord(${record.rowNumber})">刪除</button></td>
+      <td>{{row.name}}</td>
+      <td>{{row.phone}}</td>
+      <td>{{row.carType}}</td>
+      <td>{{row.plate}}</td>
+      <td>{{row.service}}</td>
+      <td>{{row.date}}</td>
+      <td>{{row.time}}</td>
+      <td><button class="btn btn-danger btn-sm" onclick="deleteRecord({{index}})">刪除</button></td>
     `;
-    tableBody.appendChild(tr);
+    tbody.appendChild(tr);
   });
 }
 
-function deleteRecord(rowNumber) {
-  fetch(scriptURL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'delete', rowNumber })
-  })
-  .then(res => res.json())
-  .then(() => fetchRecords())
-  .catch(error => alert('刪除失敗：' + error));
+function sortByTime() {
+  const sorted = [...window.originalData].sort((a, b) => new Date(a.date + 'T' + a.time) - new Date(b.date + 'T' + b.time));
+  displayRecords(sorted);
 }
 
-function sortByDate() {
-  const sorted = [...records].sort((a, b) => new Date(a.date + ' ' + a.time) - new Date(b.date + ' ' + b.time));
-  renderTable(sorted);
-}
-
-searchInput.addEventListener('input', () => {
-  const keyword = searchInput.value.toLowerCase();
-  const filtered = records.filter(r =>
-    r.name.toLowerCase().includes(keyword) ||
-    r.phone.includes(keyword) ||
-    r.plate.toLowerCase().includes(keyword)
+function searchRecords() {
+  const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+  const filtered = window.originalData.filter(row =>
+    row.name.toLowerCase().includes(keyword) ||
+    row.phone.toLowerCase().includes(keyword) ||
+    row.plate.toLowerCase().includes(keyword)
   );
-  renderTable(filtered);
-});
+  displayRecords(filtered);
+}
+
+document.getElementById('searchInput').addEventListener('input', searchRecords);
+
+async function deleteRecord(index) {
+  const row = window.originalData[index];
+  if (!confirm(`確定要刪除 ${row.name} 的預約嗎？`)) return;
+
+  const formData = new FormData();
+  formData.append('action', 'delete');
+  formData.append('timestamp', row.timestamp);
+
+  try {
+    const res = await fetch(scriptURL, { method: 'POST', body: formData });
+    const result = await res.json();
+    if (result.success) {
+      alert('刪除成功');
+      fetchRecords();
+    } else {
+      alert('刪除失敗');
+    }
+  } catch (err) {
+    alert('刪除失敗：' + err.message);
+  }
+}
 
 fetchRecords();
