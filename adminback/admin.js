@@ -1,4 +1,4 @@
-const base = location.href.split('?')[0];
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzsQcgLp6fcWM4Z2btrCaepz8JaUOVjCZxpsZuGdn4tFm2L2fDs-vcvD8DGsxeuzurhEg/exec?json=true';
 let currentSort = 'asc';
 
 // 取得並顯示紀錄
@@ -6,7 +6,7 @@ async function fetchRecords() {
   const term = document.getElementById('searchInput').value.trim();
   const params = new URLSearchParams({ json: 'true', sortOrder: currentSort });
   if (term) params.append('searchTerm', term);
-  const res = await fetch(base + '?' + params);
+  const res = await fetch('https://script.google.com/macros/s/AKfycbzsQcgLp6fcWM4Z2btrCaepz8JaUOVjCZxpsZuGdn4tFm2L2fDs-vcvD8DGsxeuzurhEg/exec' + '?' + params);
   const { records } = await res.json();
   displayRecords(records);
 }
@@ -25,8 +25,7 @@ function displayRecords(data) {
       <td>${rec.service}</td>
       <td>${rec.date}</td>
       <td>${rec.time}</td>
-      <td><button class="btn btn-danger btn-sm" onclick="deleteRecord(${rec.rowNumber})">刪除</button></td>
-    `;
+      <td><button class="btn btn-danger btn-sm" onclick="deleteRecord(${rec.rowNumber})">刪除</button></td>`;
     tbody.appendChild(tr);
   });
 }
@@ -34,7 +33,7 @@ function displayRecords(data) {
 // 刪除功能
 async function deleteRecord(rowNumber) {
   if (!confirm('確定要刪除這筆紀錄嗎？')) return;
-  const res = await fetch(base, {
+  const res = await fetch('https://script.google.com/macros/s/AKfycbzsQcgLp6fcWM4Z2btrCaepz8JaUOVjCZxpsZuGdn4tFm2L2fDs-vcvD8DGsxeuzurhEg/exec', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ action: 'delete', rowNumber })
@@ -53,7 +52,7 @@ function toggleSort() {
 
 // 登出
 document.getElementById('logoutBtn')?.addEventListener('click', () => {
-  window.location.href = '?';
+  window.location.href = 'index.html';
 });
 
 // 綁定事件 & 初始載入
