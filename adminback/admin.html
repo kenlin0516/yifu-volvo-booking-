@@ -1,118 +1,51 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>益福汽車後台管理</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>益福汽車 - 後台預約紀錄</title>
   <style>
-    body { font-family: Arial; background: #f9f9f9; padding: 20px; }
-    table { width: 100%; background: white; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-    .logout { float: right; padding: 5px 10px; background: #d00; color: white; text-decoration: none; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #333;
+      color: white;
+    }
+    input, button {
+      margin-bottom: 10px;
+      padding: 5px 10px;
+    }
   </style>
 </head>
 <body>
-  <a class="logout" href="#" onclick="logout()">登出</a>
-  <h1>益福汽車 - 後台預約紀錄</h1>
-  
-  <div style="margin: 20px 0;">
-    <input type="text" id="searchInput" placeholder="搜尋姓名 / 電話 / 車牌" style="padding:8px; width: 60%;">
-    <button onclick="sortByDate()">依時間排序</button>
-  </div>
-
-<table>
+  <h2>益福汽車 - 後台預約紀錄</h2>
+  <input type="text" id="searchInput" placeholder="搜尋姓名 / 電話 / 車牌" />
+  <button onclick="sortByTime()">依時間排序</button>
+  <table id="recordTable">
     <thead>
       <tr>
         <th>姓名</th><th>電話</th><th>車種</th><th>車牌</th><th>項目</th><th>日期</th><th>時間</th><th>操作</th>
       </tr>
     </thead>
-    <tbody id="records"></tbody>
+    <tbody></tbody>
   </table>
-  
 
-<script>
-if (sessionStorage.getItem('login') !== 'true') location.href = 'login.html';
-
-function logout() {
-  sessionStorage.removeItem('login');
-  location.href = 'login.html';
-}
-
-let rawData = [];
-
-function renderTable(data) {
-  const tbody = document.getElementById('records');
-  tbody.innerHTML = "";
-  data.forEach((row, index) => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${row['姓名'] || ''}</td>
-      <td>${row['電話'] || ''}</td>
-      <td>${row['車種'] || ''}</td>
-      <td>${row['車牌'] || ''}</td>
-      <td>${row['項目'] || ''}</td>
-      <td>${row['日期'] || ''}</td>
-      <td>${row['時間'] || ''}</td>
-      <td><button onclick="deleteRow(${index})">刪除</button></td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-function deleteRow(index) {
-  if (!confirm("確定要刪除這筆資料嗎？")) return;
-  const row = rawData[index];
-  const cleanedRow = {
-    姓名: String(row['姓名'] || '').trim(),
-    電話: String(row['電話'] || '').trim(),
-    車種: String(row['車種'] || '').trim(),
-    車牌: String(row['車牌'] || '').trim(),
-    項目: String(row['項目'] || '').trim(),
-    日期: String(row['日期'] || '').trim(),
-    時間: String(row['時間'] || '').trim()
-  };
-  fetch("https://script.google.com/macros/s/AKfycbzsQcgLp6fcWM4Z2btrCaepz8JaUOVjCZxpsZuGdn4tFm2L2fDs-vcvD8DGsxeuzurhEg/exec", {
-    method: "POST",
-    body: JSON.stringify({ action: "delete", row: cleanedRow }),
-  })
-  .then(res => res.text())
-  .then(msg => {
-    alert(msg);
-    location.reload();
-  })
-  .catch(err => alert("刪除失敗：" + err.message));
-}
-
-function sortByDate() {
-  rawData.sort((a, b) => {
-    const parseTime = (d, t) => {
-      const parts = `${d} ${t}`.replace(/上午|AM/i, "").replace(/下午|PM/i, "").trim();
-      return new Date(parts).getTime();
-    };
-    return parseTime(a['日期'], a['時間']) - parseTime(b['日期'], b['時間']);
-  });
-  renderTable(rawData);
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  document.getElementById('searchInput').addEventListener("input", function() {
-    const keyword = this.value.trim().toLowerCase();
-    const filtered = rawData.filter(row =>
-      String(row['姓名'] || '').toLowerCase().includes(keyword) ||
-      String(row['電話'] || '').toLowerCase().includes(keyword) ||
-      String(row['車牌'] || '').toLowerCase().includes(keyword)
-    );
-    renderTable(filtered);
-  });
-
-  fetch("https://script.google.com/macros/s/AKfycbwhXAjx2AReraUx8ztJbik4018zdwXURd8TsxOowZmtzd2LtsEcJhxhV8utLjFwoBnl6g/exec")
-    .then(res => res.json())
-    .then(data => {
-      rawData = data;
-      renderTable(rawData);
-    });
-});
-</script>
-
-
+  <script src="admin.js"></script>
 </body>
 </html>
