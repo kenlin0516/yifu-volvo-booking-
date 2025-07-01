@@ -7,16 +7,32 @@
 </head>
 <body>
   <div class="container py-4">
-    <h3 class="mb-4">益福汽車 - 後台預約紀錄</h3>
-    <input type="text" id="searchInput" class="form-control mb-2" placeholder="搜尋姓名 / 電話 / 車牌">
-    <button class="btn btn-secondary mb-3" onclick="sortByTime()">依時間排序</button>
+    <h3 class="mb-4 text-center">益福汽車 - 後台預約紀錄</h3>
+
+    <div class="d-flex mb-3">
+      <input type="text" id="searchInput" class="form-control me-2" placeholder="搜尋姓名 / 電話 / 車牌">
+      <button id="sortButton" class="btn btn-secondary">依時間排序 ↑</button>
+    </div>
+
     <div class="table-responsive">
-      <table class="table table-bordered">
-        <thead><tr><th>姓名</th><th>電話</th><th>車種</th><th>車牌</th><th>項目</th><th>日期</th><th>時間</th><th>操作</th></tr></thead>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>電話</th>
+            <th>車種</th>
+            <th>車牌</th>
+            <th>服務</th>
+            <th>日期</th>
+            <th>時間</th>
+            <th>操作</th>
+          </tr>
+        </thead>
         <tbody id="recordTableBody"></tbody>
       </table>
     </div>
   </div>
+
   <script src="admin.js"></script>
 </body>
 </html>
