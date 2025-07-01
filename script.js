@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         time: document.getElementsByName('time')[0].value,
       };
 
-      fetch('https://script.google.com/macros/s/AKfycbzsQcgLp6fcWM4Z2btrCaepz8JaUOVjCZxpsZuGdn4tFm2L2fDs-vcvD8DGsxeuzurhEg/exec', {
+      fetch('https://script.google.com/macros/s/AKfycbw5Su_3xvgWLTq9BQrGp1IBSJbjNYipiFywutYi9fXa2v-R1DOoOBmCv0sSRxJ-c3Gq/exec', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
