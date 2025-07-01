@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>後台登入 - 益福汽車</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>管理員登入</title>
   <style>
-    body { font-family: Arial; background: #f0f0f0; padding: 50px; text-align: center; }
-    .box { background: #fff; padding: 30px; border-radius: 10px; max-width: 400px; margin: auto; }
-    input, button { width: 100%; padding: 12px; margin: 10px 0; }
+    body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #f0f0f0; }
+    input, button { padding: 10px; margin: 5px; }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h2>後台登入</h2>
-    <input id="username" placeholder="帳號">
-    <input id="password" type="password" placeholder="密碼">
-    <button onclick="login()">登入</button>
-    <p id="msg" style="color:red;"></p>
-  </div>
+  <h2>登入後台</h2>
+  <input type="password" id="password" placeholder="輸入密碼">
+  <button onclick="login()">登入</button>
+
   <script>
     function login() {
-      const u = document.getElementById('username').value;
-      const p = document.getElementById('password').value;
-      if (u === 'admin' && p === 'yifu2025') {
-        sessionStorage.setItem('login', 'true');
-        location.href = 'admin.html';
+      const password = document.getElementById('password').value;
+      if (password === 'admin') {
+        window.location.href = 'admin.html';
       } else {
-        document.getElementById('msg').innerText = '帳號或密碼錯誤';
+        alert('密碼錯誤');
       }
     }
   </script>

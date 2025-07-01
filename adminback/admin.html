@@ -2,45 +2,33 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>益福汽車 - 後台預約紀錄</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f4f4f4;
-    }
-    h2 {
-      margin-bottom: 20px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: #fff;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-    }
-    th {
-      background-color: #333;
-      color: white;
-    }
-    input, button {
-      margin-bottom: 10px;
-      padding: 5px 10px;
-    }
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f8f8f8; }
+    h2 { margin-bottom: 20px; }
+    input[type="text"] { padding: 8px; margin-bottom: 10px; width: 300px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    button { padding: 5px 10px; }
   </style>
 </head>
 <body>
   <h2>益福汽車 - 後台預約紀錄</h2>
-  <input type="text" id="searchInput" placeholder="搜尋姓名 / 電話 / 車牌" />
-  <button onclick="sortByTime()">依時間排序</button>
-  <table id="recordTable">
+  <input type="text" id="searchInput" placeholder="搜尋姓名 / 電話 / 車牌">
+  <button onclick="sortByDate()">依時間排序</button>
+  <table id="recordsTable">
     <thead>
       <tr>
-        <th>姓名</th><th>電話</th><th>車種</th><th>車牌</th><th>項目</th><th>日期</th><th>時間</th><th>操作</th>
+        <th>姓名</th>
+        <th>電話</th>
+        <th>車種</th>
+        <th>車牌</th>
+        <th>項目</th>
+        <th>日期</th>
+        <th>時間</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody></tbody>
