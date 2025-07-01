@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>益福汽車 Volvo 專業維修保養</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+  <h1>益福汽車 Volvo 專業維修保養</h1>
+  <p class="description">歡迎使用線上預約系統，我們提供專業的 Volvo 維修、保養、檢查等服務。</p>
+    
+    <div class="reservation-form-wrapper">
+<form id="bookingForm">
+    <input type="text" id="name" placeholder="姓名" required>
+    <input type="tel" id="phone" placeholder="電話" required>
+    <input type="text" id="carModel" placeholder="車種" required>
+    <input type="text" id="license" placeholder="車牌號碼" required>
+    <select id="service">
+      <option value="換機油">換機油</option>
+      <option value="煞車異音檢查">煞車異音檢查</option>
+      <option value="定期保養">定期保養</option>
+      <option value="輪胎更換">輪胎更換</option>
+      <option value="引擎檢查">引擎檢查</option>
+      <option value="其他">其他</option>
+    </select>
+    <input type="date" id="date" required>
+    <input type="time" id="time" required>
+    <button type="submit">送出預約</button>
+  </form>
+  <p class="success" id="successMessage" style="display:none;">✅ 預約成功！我們將盡快與您聯繫確認。</p>
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        carModel: document.getElementById('carModel').value,
+        license: document.getElementById('license').value,
+        service: document.getElementById('service').value,
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value
+      };
+      try {
+        await fetch("https://script.google.com/macros/s/AKfycbwhXAjx2AReraUx8ztJbik4018zdwXURd8TsxOowZmtzd2LtsEcJhxhV8utLjFwoBnl6g/exec", {
+          method: 'POST',
+          body: JSON.stringify(data)
+        });
+        document.getElementById('successMessage').style.display = 'block';
+        document.getElementById('bookingForm').reset();
+      } catch (error) {
+        alert("送出失敗，請稍後再試");
+      }
+    });
+  </script>
+
+<script>
+document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const data = {
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    carModel: document.getElementById('carModel').value,
+    license: document.getElementById('license').value,
+    service: document.getElementById('service').value,
+    date: document.getElementById('date').value,
+    time: document.getElementById('time').value
+  };
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbwhXAjx2AReraUx8ztJbik4018zdwXURd8TsxOowZmtzd2LtsEcJhxhV8utLjFwoBnl6g/exec", {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    document.getElementById('successMessage').style.display = 'block';
+    document.getElementById('bookingForm').reset();
+  } catch (error) {
+    alert("送出失敗，請稍後再試");
+  }
+});
+</script>
+    </div>
+    <a href="records.html" class="record-btn">📁 預約紀錄</a>
+  </div>
+</body>
+
+</html>
