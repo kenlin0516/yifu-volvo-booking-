@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    fetch("https://script.google.com/macros/s/AKfycbw5Su_3xvgWLTq9BQrGp1IBSJbjNYipiFywutYi9fXa2v-R1DOoOBmCv0sSRxJ-c3Gq/exec", {
+    fetch("https://docs.google.com/spreadsheets/d/1tHULMMx8OmglWMBa4mLK17P9LVXVlgSVyv69Rh6WfTQ/edit?usp=sharing", {
       method: "POST",
       body: new URLSearchParams(data),
     })
